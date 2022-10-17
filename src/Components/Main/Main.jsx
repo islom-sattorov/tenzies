@@ -1,3 +1,4 @@
+import Button from '../Button/Button'
 import Table from "../Table/Table"
 
 function Main() {
@@ -11,6 +12,7 @@ function Main() {
                     between rolls.
                 </p>
                 <Table />
+                <Button />
             </div>
         </main>
     )

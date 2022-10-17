@@ -26,6 +26,7 @@ html{
   justify-content: center;
   align-items: center;
   padding: 35px;
+  gap: 20px;
 }
 
 .main_title{
@@ -35,7 +36,6 @@ html{
   letter-spacing: -3%;
   text-align: center;
   color: #2b283a;
-  margin-bottom: 15px;
 }
 
 .main_subtitle{
@@ -48,11 +48,9 @@ html{
 
 /* Numbers */
 .numbers{
-  border: 1px solid green;
   display: grid;
   grid-template-columns: repeat(5,1fr);
   width: 400px;
-  margin: 10px 0 0 0;
 }
 
 .number{
@@ -66,4 +64,17 @@ html{
   font-size: 20px;
   font-weight: 700;
   background: #fff;
+}
+
+.table_btn{
+  background: #4035ff;
+  box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  width: 200px;
+  height: 35px;
+  font-weight: 700;
+  font-size: 17px;
+  text-align: center;
+  color: #fff;
+  border: none;
 }
