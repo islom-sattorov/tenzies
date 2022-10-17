@@ -1,3 +1,5 @@
+import Table from "../Table/Table"
+
 function Main() {
     return (
         <main className="main">
@@ -8,6 +10,7 @@ function Main() {
                     each die to freeze it at its current value
                     between rolls.
                 </p>
+                <Table />
             </div>
         </main>
     )
