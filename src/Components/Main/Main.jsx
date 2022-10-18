@@ -1,13 +1,15 @@
 import { nanoid } from 'nanoid';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Confetti from 'react-confetti';
 import Table from "../Table/Table";
 
 function Main() {
+    const currentRolls = useRef(0)
     const [numbers, setNumbers] = useState(() => randomDice())
     const [tenzies, setTenzies] = useState(() => false);
     // Solution One
     // const choosenNumber = useRef(0)
+    const [bestRecord, setBestRecord] = useState(() => JSON.parse(window.localStorage.getItem("bestrecord")) || 0)
 
 
     function randomDice() {
@@ -24,6 +26,7 @@ function Main() {
 
 
     function handleClick() {
+        currentRolls.current = currentRolls.current + 1
         setNumbers(prev => prev.map(item => {
             return item.isHeld ?
                 item : { ...item, value: Math.ceil(Math.random() * 6) }
@@ -61,19 +64,24 @@ function Main() {
         const allSameValue = numbers.every(num => num.value === firstValue)
         if (allNumbers && allSameValue) {
             setTenzies(true)
-            console.log(true)
+            setBestRecord(prev => prev > currentRolls.current ? currentRolls.current : prev)
         }
     }
 
     function newGame() {
         setNumbers(() => randomDice())
         setTenzies(() => false)
+        currentRolls.current = 0
     }
 
 
     useEffect(() => {
         winCondition()
     }, [numbers])
+
+    useEffect(() => {
+        window.localStorage.setItem("bestrecord", JSON.stringify(bestRecord))
+    }, [bestRecord])
 
     return (
         <main className="main">
@@ -87,6 +95,8 @@ function Main() {
                 </p>
                 <Table set={setNumbers} numbers={numbers} />
                 <button onClick={tenzies ? newGame : handleClick} className="table_btn">{tenzies ? 'New Game' : "Roll"}</button>
+                <span className='record'>Current Rolls:{currentRolls.current}</span>
+                <span className='record'>Best Record:{bestRecord}</span>
                 {tenzies && <h2>You won!</h2>}
             </div>
         </main>
