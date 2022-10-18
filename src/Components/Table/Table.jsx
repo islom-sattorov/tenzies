@@ -9,7 +9,7 @@ function Table() {
         let arr = [];
 
         for (let i = 0; i < num; i++) {
-            arr.push(Math.floor(Math.random() * 6) + 1);
+            arr.push(Math.ceil(Math.random() * 6));
         }
 
         return arr
