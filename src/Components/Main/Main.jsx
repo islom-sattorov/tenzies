@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { useEffect, useRef, useState } from "react";
+import Confetti from 'react-confetti';
 import Button from "../Button/Button";
 import Table from "../Table/Table";
 
@@ -39,26 +40,43 @@ function Main() {
     })
 
     function winCondition() {
-        let validateArr = [];
-        for (let i = 0; i < 10; i++) {
-            if (numbers[i].isHeld && choosenNumber.current === choosenArray[i].value)
-                validateArr.push(choosenArray[i])
-            else {
-                return
-            }
+        // Solution One
+        // let validateArr = [];
+        // for (let i = 0; i < 10; i++) {
+        //     if (numbers[i].isHeld && choosenNumber.current === choosenArray[i].value) {
+        //         validateArr.push(numbers[i].value)
+        //     } else {
+        //         return
+        //     }
+        // }
 
-            if (validateArr.length === 10) {
-                console.log("Win")
-            }
+        // if (validateArr.length === 10) {
+        //     setTenzies(prev => !prev)
+        // }
+
+        // Solution two
+        const allNumbers = numbers.every(num => num.isHeld);
+        const firstValue = numbers[0].value
+        const allSameValue = numbers.every(num => num.value === firstValue)
+        if (allNumbers && allSameValue) {
+            setTenzies(true)
+            console.log(true)
         }
     }
 
+    function newGame() {
+        setNumbers(() => randomDice())
+        setTenzies(() => false)
+    }
+
+
     useEffect(() => {
-        winCondition();
+        winCondition()
     }, [numbers])
 
     return (
         <main className="main">
+            {tenzies && <Confetti />}
             <div className="main_container">
                 <h2 className="main_title">Tenzies</h2>
                 <p className="main_subtitle">
@@ -67,7 +85,8 @@ function Main() {
                     between rolls.
                 </p>
                 <Table set={setNumbers} numbers={numbers} />
-                <Button click={handleClick} />
+                <Button click={handleClick} newgame={newGame} tenz={tenzies} />
+                {tenzies && <h2>You won!</h2>}
             </div>
         </main>
     )
