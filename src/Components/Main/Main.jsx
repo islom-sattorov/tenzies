@@ -1,10 +1,12 @@
 import { nanoid } from 'nanoid';
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import Table from "../Table/Table";
 
 function Main() {
     const [numbers, setNumbers] = useState(() => randomDice())
+    const [tenzies, setTenzies] = useState(() => false);
+    const choosenNumber = useRef(0)
 
 
     function randomDice() {
@@ -21,10 +23,39 @@ function Main() {
 
 
     function handleClick() {
-        setNumbers(randomDice())
+        setNumbers(prev => prev.map(item => {
+            return item.isHeld ?
+                item : { ...item, value: Math.ceil(Math.random() * 6) }
+        }))
     }
 
+    const choosenArray = numbers.filter((item) => {
+        if (item.isHeld) {
+            choosenNumber.current = item.value
+            return item
+        } else {
+            return
+        }
+    })
 
+    function winCondition() {
+        let validateArr = [];
+        for (let i = 0; i < 10; i++) {
+            if (numbers[i].isHeld && choosenNumber.current === choosenArray[i].value)
+                validateArr.push(choosenArray[i])
+            else {
+                return
+            }
+
+            if (validateArr.length === 10) {
+                console.log("Win")
+            }
+        }
+    }
+
+    useEffect(() => {
+        winCondition();
+    }, [numbers])
 
     return (
         <main className="main">

@@ -1,7 +1,5 @@
-import { useState } from "react";
 
 function Table(props) {
-    const [currentId, setCurrentId] = useState(() => '')
 
     function renderedNumbers(arr) {
         return arr.map(item => <div
