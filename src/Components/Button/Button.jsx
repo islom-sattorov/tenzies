@@ -1,6 +1,6 @@
-function Button() {
+function Button(props) {
     return (
-        <button className="table_btn">Roll</button>
+        <button onClick={props.click} className="table_btn">Roll</button>
     )
 }
 

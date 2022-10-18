@@ -9,6 +9,9 @@ html{
   font-family: 'Karla', sans-serif;
 }
 
+body{
+  background: linear-gradient(to left, #59C173, #a17fe0, #5D26C1);
+}
 .main{
   border-top: 40px solid #0B2434;
   border-bottom: 40px solid #0B2434;
@@ -79,4 +82,12 @@ html{
   text-align: center;
   color: #fff;
   border: none;
+}
+
+.table_btn:focus{
+  outline: none;
+}
+
+.table_btn:active{
+box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
