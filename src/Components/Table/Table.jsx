@@ -2,7 +2,7 @@
 function Table(props) {
 
     function renderedNumbers(arr) {
-        return arr.map(item => <div className="number" key={item.id}>{item.value}</div>)
+        return arr.map(item => <div className={item.isHeld ? 'isHeld' : 'number'} key={item.id}>{item.value}</div>)
     }
 
 
