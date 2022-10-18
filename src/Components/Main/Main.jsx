@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { useEffect, useRef, useState } from "react";
 import Confetti from 'react-confetti';
+import Red from '../Red/Red';
 import Table from "../Table/Table";
 
 function Main() {
@@ -85,7 +86,6 @@ function Main() {
 
     return (
         <main className="main">
-            {tenzies && <Confetti />}
             <div className="main_container">
                 <h2 className="main_title">Tenzies</h2>
                 <p className="main_subtitle">
@@ -98,6 +98,8 @@ function Main() {
                 <span className='record'>Current Rolls:{currentRolls.current}</span>
                 <span className='record'>Best Record:{bestRecord}</span>
                 {tenzies && <h2>You won!</h2>}
+                {tenzies && <Confetti />}
+                <Red />
             </div>
         </main>
     )
