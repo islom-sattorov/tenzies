@@ -5,23 +5,28 @@ function Table() {
 
 
 
-    function randomDice() {
-        let randomNumber = [];
-        for (let i = 0; i < 10; i++) {
-            randomNumber.push(Math.floor(Math.random() * 6) + 1)
+    function randomDice(num) {
+        let arr = [];
+
+        for (let i = 0; i < num; i++) {
+            arr.push(Math.floor(Math.random() * 6) + 1);
         }
 
-        return randomNumber
+        return arr
     }
 
-    const renderedNumbers = randomDice().map((item, idx) => <div className="number" key={idx}>{item}</div>)
+    function renderedNumbers(arr) {
+        return arr(10).map((item, idx) => <div className="number" key={idx}>{item}</div>)
+    }
 
 
     return (
         <div className="numbers">
-            {renderedNumbers}
+            {renderedNumbers(randomDice)}
         </div>
     )
 }
 
 export default Table
+
+
