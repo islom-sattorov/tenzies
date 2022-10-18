@@ -1,13 +1,13 @@
 import { nanoid } from 'nanoid';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Confetti from 'react-confetti';
-import Button from "../Button/Button";
 import Table from "../Table/Table";
 
 function Main() {
     const [numbers, setNumbers] = useState(() => randomDice())
     const [tenzies, setTenzies] = useState(() => false);
-    const choosenNumber = useRef(0)
+    // Solution One
+    // const choosenNumber = useRef(0)
 
 
     function randomDice() {
@@ -30,14 +30,15 @@ function Main() {
         }))
     }
 
-    const choosenArray = numbers.filter((item) => {
-        if (item.isHeld) {
-            choosenNumber.current = item.value
-            return item
-        } else {
-            return
-        }
-    })
+    // Solution One
+    // const choosenArray = numbers.filter((item) => {
+    //     if (item.isHeld) {
+    //         choosenNumber.current = item.value
+    //         return item
+    //     } else {
+    //         return
+    //     }
+    // })
 
     function winCondition() {
         // Solution One
@@ -85,7 +86,7 @@ function Main() {
                     between rolls.
                 </p>
                 <Table set={setNumbers} numbers={numbers} />
-                <Button click={handleClick} newgame={newGame} tenz={tenzies} />
+                <button onClick={tenzies ? newGame : handleClick} className="table_btn">{tenzies ? 'New Game' : "Roll"}</button>
                 {tenzies && <h2>You won!</h2>}
             </div>
         </main>
