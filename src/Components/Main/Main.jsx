@@ -19,6 +19,7 @@ function Main() {
         return arr
     }
 
+
     function handleClick() {
         setNumbers(randomDice())
     }
@@ -34,7 +35,7 @@ function Main() {
                     each die to freeze it at its current value
                     between rolls.
                 </p>
-                <Table numbers={numbers} />
+                <Table set={setNumbers} numbers={numbers} />
                 <Button click={handleClick} />
             </div>
         </main>
