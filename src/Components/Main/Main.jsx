@@ -6,22 +6,17 @@ import Table from "../Table/Table";
 function Main() {
     const currentRolls = useRef(0)
     const [numbers, setNumbers] = useState(() => randomDice())
-    const [tenzies, setTenzies] = useState(() => false);
-    // Solution One
-    // const choosenNumber = useRef(0)
+    const [tenzies, setTenzies] = useState(false);
     const [bestRecord, setBestRecord] = useState(() => JSON.parse(window.localStorage.getItem("bestrecord")) || 0)
 
 
     function randomDice() {
-        let arr = [];
-        for (let i = 0; i < 10; i++) {
-            arr.push({
-                id: nanoid(),
-                value: Math.ceil(Math.random() * 6),
-                isHeld: false,
-            })
-        }
-        return arr
+        return Array.from({ length: 10 }).map(() => ({
+            id: nanoid(),
+            value: Math.ceil(Math.random() * 6),
+            isHeld: false,
+
+        }))
     }
 
 
@@ -33,38 +28,13 @@ function Main() {
         }))
     }
 
-    // Solution One
-    // const choosenArray = numbers.filter((item) => {
-    //     if (item.isHeld) {
-    //         choosenNumber.current = item.value
-    //         return item
-    //     } else {
-    //         return
-    //     }
-    // })
-
     function winCondition() {
-        // Solution One
-        // let validateArr = [];
-        // for (let i = 0; i < 10; i++) {
-        //     if (numbers[i].isHeld && choosenNumber.current === choosenArray[i].value) {
-        //         validateArr.push(numbers[i].value)
-        //     } else {
-        //         return
-        //     }
-        // }
-
-        // if (validateArr.length === 10) {
-        //     setTenzies(prev => !prev)
-        // }
-
-        // Solution two
         const allNumbers = numbers.every(num => num.isHeld);
         const firstValue = numbers[0].value
         const allSameValue = numbers.every(num => num.value === firstValue)
         if (allNumbers && allSameValue) {
             setTenzies(true)
-            setBestRecord(prev => prev > currentRolls.current ? currentRolls.current : prev)
+            setBestRecord(prev => prev < currentRolls.current ? currentRolls.current : prev)
         }
     }
 
