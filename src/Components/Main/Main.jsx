@@ -6,20 +6,17 @@ import Table from "../Table/Table";
 function Main() {
     const currentRolls = useRef(0)
     const [numbers, setNumbers] = useState(() => randomDice())
-    const [tenzies, setTenzies] = useState(() => false);
+    const [tenzies, setTenzies] = useState(false);
     const [bestRecord, setBestRecord] = useState(() => JSON.parse(window.localStorage.getItem("bestrecord")) || 0)
 
 
     function randomDice() {
-        let arr = [];
-        for (let i = 0; i < 10; i++) {
-            arr.push({
-                id: nanoid(),
-                value: Math.ceil(Math.random() * 6),
-                isHeld: false,
-            })
-        }
-        return arr
+        return Array.from({ length: 10 }).map(() => ({
+            id: nanoid(),
+            value: Math.ceil(Math.random() * 6),
+            isHeld: false,
+
+        }))
     }
 
 
