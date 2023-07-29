@@ -34,7 +34,7 @@ function Main() {
         const allSameValue = numbers.every(num => num.value === firstValue)
         if (allNumbers && allSameValue) {
             setTenzies(true)
-            setBestRecord(prev => prev > currentRolls.current ? currentRolls.current : prev)
+            setBestRecord(prev => prev < currentRolls.current ? currentRolls.current : prev)
         }
     }
 
